@@ -91,7 +91,7 @@ class DisplayNews extends React.Component {
       <>
         <article>
           <div className="button-div">
-            <button onClick={this.handleShuffle}>Shuffle News</button>
+            <button onClick={this.handleShuffle}>Step 1 - Shuffle News</button>
           </div>
           {!articles && !this.error && <h1>Loading...</h1>}
           {articles &&
@@ -106,12 +106,11 @@ class DisplayNews extends React.Component {
         </article>
         <div>
           <div className="button-div">
-            <button onClick={this.handleFake}>Randomise</button>
+            <button onClick={this.handleFake}>Step 2 - Randomise</button>
           </div>
           <div className="button-wrapper">
-            <button onClick={this.makeFakeHeadLine} value="synonyms">Altered News</button>
-            <button onClick={this.makeFakeHeadLine} value="typeOf">Edited News</button>
-            <button onClick={this.makeFakeHeadLine} value="similarTo">Revised News</button>
+            <button onClick={this.makeFakeHeadLine} value="synonyms">Step 3 - Alternative News</button>
+            <button onClick={this.makeFakeHeadLine} value="typeOf">Step 3 - Alternative News</button>
           </div>
           <h2>{fakeHeadline}</h2>
         </div>
