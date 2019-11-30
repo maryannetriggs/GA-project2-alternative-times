@@ -1,11 +1,16 @@
 import React from 'react'
 
+// For displaying current date
+const today = new Date()
+const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+const date = today.toLocaleDateString('en-GB', options)
+
 const Header = () => (
   <>
     <h1>The Alternative Times</h1>
     <div className="dateBar">
-      <p>Volume: MMXIX</p>
-      <p>Friday 11 October 2019</p>
+      <p>Volume: MDXXV</p>
+      <p>{date}</p>
       <p>£2.50</p>
     </div>
   </>

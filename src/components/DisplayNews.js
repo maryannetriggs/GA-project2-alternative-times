@@ -39,9 +39,8 @@ class DisplayNews extends React.Component {
   handleFake() {
     const wordsKey = process.env.WORDSAPI_ACCESS_KEY
     
-    const originalHeadline = this.state.originalHeadline
+    // const originalHeadline = this.state.originalHeadline
     // const fakeHeadline = originalHeadline.toLowerCase().split(/[. ,:;\-_']+/)
-      
     const fakeHeadlineObject = {}
 
     Promise.all(this.state.originalHeadline.map(word => {
@@ -80,7 +79,6 @@ class DisplayNews extends React.Component {
     // console.log('fake headline array',fakeHeadline)
 
     this.setState({ fakeHeadline: fakeHeadline.join(' ').toUpperCase() })
-
   }
 
 
@@ -92,6 +90,7 @@ class DisplayNews extends React.Component {
         <article>
           <div className="button-div">
             <button onClick={this.handleShuffle}>Step 1 - Shuffle News</button>
+            <button onClick={this.handleFake}>Step 2 - Randomise</button>
           </div>
           {!articles && !this.error && <h1>Loading...</h1>}
           {articles &&
@@ -105,9 +104,6 @@ class DisplayNews extends React.Component {
           }
         </article>
         <div>
-          <div className="button-div">
-            <button onClick={this.handleFake}>Step 2 - Randomise</button>
-          </div>
           <div className="button-wrapper">
             <button onClick={this.makeFakeHeadLine} value="synonyms">Step 3 - Alternative News</button>
             <button onClick={this.makeFakeHeadLine} value="typeOf">Step 3 - Alternative News</button>
