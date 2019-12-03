@@ -66,10 +66,10 @@ class DisplayNews extends React.Component {
     const fakeHeadline = this.state.originalHeadline.map(word => {
       
       if (typeof this.state.fakeHeadlineObject[word] === 'string') {
-        // console.log('string:',word)
+        // console.log('string:', word)
         return word
       } else if (typeof this.state.fakeHeadlineObject[word] === 'undefined') {
-        // console.log('undefined:',word)
+        // console.log('undefined:', word)
         return word
       } else {
         return this.state.fakeHeadlineObject[word].results[0][value] ? this.state.fakeHeadlineObject[word].results[0][value][0] : word

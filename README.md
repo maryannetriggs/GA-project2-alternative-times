@@ -2,12 +2,12 @@
 
 # GA Project 2 - The Alternative Times
 
-Design based on the British newspaper 'The Times' this project is a website that requests the top UK News stories from News API and then passes the headline through Words API to create an alternative headline from word associations. this was the second project I completed during the General Assembly Software Engineering Immersive (bootcamp) course.
+Design based on the British newspaper 'The Times' this project is a website that requests the top UK News stories from News API and then passes the headline through Words API to create an alternative headline from word associations. This was the second project I completed during the General Assembly Software Engineering Immersive (bootcamp) course.
 
 ## Resources
 
 * The Times [Newspaper](https://www.thetimes.co.uk/)
-* [Wikipedia](https://en.wikipedia.org/wiki/The_Times)
+* The Times - [Wikipedia](https://en.wikipedia.org/wiki/The_Times)
 * [News API](https://newsapi.org/)
 * [Words API](https://www.wordsapi.com/)
 
@@ -55,13 +55,42 @@ To get your alternative news headline (hopefully with hilarious outcomes)
 
 ---
 
-## Architecture
+## Architecture and Challenges
+
+- Dealing with gaps in information - the Words API doesn't hold information on all words, so some control flow had to be included to deal with missing/undefined data. As shown by the following code, words that could not be converted are simply returned as their original word:
+
+```js
+if (typeof this.state.fakeHeadlineObject[word] === 'string') {
+        // console.log('string:', word)
+        return word
+      } else if (typeof this.state.fakeHeadlineObject[word] === 'undefined') {
+        // console.log('undefined:', word)
+        return word
+```
+
+- The number of API requests we were sending to Words API - we introduced a minimum word length to prevent requests to replace short words such as 'at' or 'and'. This decision was made to maintain legibility of alternative headline and ensure API calls weren't excessive.
+
+```js
+if (word.length < 3) {
+        fakeHeadlineObject[word] = word
+      } else {
+        axios.get(`https://wordsapiv1.p.rapidapi.com/words/${word}`, {
+          headers: { 
+            'x-rapidapi-host': 'wordsapiv1.p.rapidapi.com',
+            'x-rapidapi-key': wordsKey
+          } })
+          .then(res => fakeHeadlineObject[word] = res.data)
+          .catch(() => fakeHeadlineObject[word] = word)
+      } 
+```
+
+- Punctuation in headline's retrieved from News API caused errors as the Words API couldn't recognise the words with the additional characters. We removed as much punctiation as possible with a Regex filter, this still insn't perfect but works approximately 80% of the time.
 
 ```js
 getStory() {
     const newsKey = process.env.NEWSAPI_ACCESS_KEY
     axios.get(`https://newsapi.org//v2/top-headlines?country=gb&apiKey=${newsKey}`)
-      .then(res => this.setState({ articles: res.data.articles, originalHeadline: res.data.articles[0].title.toLowerCase().split(/[. ,:;\-_']+/) })) // has [0] to match the shuffle index start
+      .then(res => this.setState({ articles: res.data.articles, originalHeadline: res.data.articles[0].title.toLowerCase().split(/[. ,:;\-_']+/) }))
       .catch(err => this.setState({ error: err.message }))
   }
 ```
@@ -78,7 +107,6 @@ Advancements that could be made in the future to improve this website include:
 - Ability to share new headlines on social media accounts with friends
 - Improved RegEx to ensure maximum headline translation
 - Reduce number of buttons required to get to your alterntive headline.
-- Additional styling to look even more like The Times newspaper
 
 ## Author - Mary-Anne Triggs
 
