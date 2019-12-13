@@ -15,9 +15,10 @@ Design based on the British newspaper 'The Times' this project is a website that
 
 * HTML5
 * SCSS
-* Javascript
+* JavaScript
 * React
 * Axios
+* npm
 * NewsAPI and WordsAPI
 * Git / GitHub
 
@@ -94,6 +95,27 @@ getStory() {
       .catch(err => this.setState({ error: err.message }))
   }
 ```
+
+---
+
+## Wins
+
+The wins associated with this project were:
+
+* A greater understanding of the Promise object in JavaScript
+* Simple styling, with large impact
+* Combining components in React
+
+---
+
+## Key Learning Points
+
+The key learning points associated with this project were:
+
+* The importance of communication in pair programming
+* Greater experience interacting with external API's
+* RegEx's are complicated but essential
+* Hackathon's are fun!
 
 ---
 
